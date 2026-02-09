@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown 10 Ottobre</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        h1 { margin-bottom: 1.5rem; font-weight: 300; }
+        #timer {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .time-box {
+            display: flex;
+            flex-direction: column;
+        }
+        .number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+        }
+        .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Mancano al 10 Ottobre:</h1>
+    <div id="timer">
+        <div class="time-box"><span class="number" id="days">00</span><span class="label">Giorni</span></div>
+        <div class="time-box"><span class="number" id="hours">00</span><span class="label">Ore</span></div>
+        <div class="time-box"><span class="number" id="minutes">00</span><span class="label">Minuti</span></div>
+        <div class="time-box"><span class="number" id="seconds">00</span><span class="label">Secondi</span></div>
+    </div>
+</div>
+
+<script>
+    const targetDate = new Date("Oct 10, 2026 00:00:00").getTime();
+
+    const countdown = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+
+        if (distance < 0) {
+            clearInterval(countdown);
+            document.querySelector(".container").innerHTML = "<h1>È il grande giorno!</h1>";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
